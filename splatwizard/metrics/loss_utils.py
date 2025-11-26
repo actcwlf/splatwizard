@@ -16,11 +16,11 @@ from math import exp
 from splatwizard._cmod.fused_ssim import fused_ssim
 
 
-def l1_func(network_output, gt):
-    return torch.abs((network_output - gt)).mean()
+def l1_func(img1, img2):
+    return torch.abs((img1 - img2)).mean()
 
-def l2_func(network_output, gt):
-    return ((network_output - gt) ** 2).mean()
+def l2_func(img1, img2):
+    return ((img1 - img2) ** 2).mean()
 
 def gaussian(window_size, sigma):
     gauss = torch.Tensor([exp(-(x - window_size // 2) ** 2 / float(2 * sigma ** 2)) for x in range(window_size)])
@@ -76,7 +76,7 @@ def psnr_func(img1, img2):
     mse = (((img1 - img2)) ** 2).view(img1.shape[0], -1).mean(1, keepdim=True)
     return 20 * torch.log10(1.0 / torch.sqrt(mse))
 
-lpips_fn = lpips.LPIPS(net='vgg').to('cuda')
+lpips_func = lpips.LPIPS(net='vgg').to('cuda')
 
 
 
