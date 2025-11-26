@@ -6,7 +6,7 @@ import torchvision
 
 from splatwizard.config import PipelineParams
 from splatwizard.data_loader.dataset_readers import fetchPly
-from splatwizard.metrics.loss_utils import l1_func, ssim_func, psnr_func, lpips_fn
+from splatwizard.metrics import l1_func, ssim_func, psnr_func, lpips_func
 from splatwizard.modules.dataclass import EvalPack, TrainContext
 from splatwizard.modules.gaussian_model import  GaussianModel
 
@@ -99,7 +99,7 @@ def evaluate(
         l1_loss = l1_func(render_result.rendered_image, gt_image)
         ssim_loss = ssim_func(render_result.rendered_image, gt_image)
         psnr_val = psnr_func(render_result.rendered_image, gt_image)
-        lpips_val = lpips_fn(render_result.rendered_image, gt_image, normalize=True)
+        lpips_val = lpips_func(render_result.rendered_image, gt_image, normalize=True)
 
         l1_test += l1_loss.mean().double().item()
         psnr_test += psnr_val.mean().double().item()
