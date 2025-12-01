@@ -12,7 +12,7 @@ pip install splatwizard --verbose
 ```
 
 Additionally, pip compiles components in an isolated environment by default. You can use `--no-build-isolation` to perform the compilation directly in the current environment.
-
+Make sure `torch` and `ninja` are installed before running the command.
 ```bash
 pip install splatwizard --verbose --no-build-isolation
 ```
