@@ -70,8 +70,8 @@ def validate_pipeline_parameters(pp: PipelineParams):
     assert pp.eval_mode is None, "Cannot setting eval_mode for training"
 
 
-def main(sys_argv):
-    parser = ArgumentParser(add_config_path_arg=True)
+def main(sys_argv, prog=None):
+    parser = ArgumentParser(prog, add_config_path_arg=True)
     parser.add_arguments(PipelineParams, dest="pipeline")  # noqa
     parser.add_arguments(CONFIG_CACHE[0], dest="model_group")  # noqa
 

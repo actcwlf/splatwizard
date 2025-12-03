@@ -72,8 +72,8 @@ def validate_pipeline_parameters(pp: PipelineParams):
             assert type_ in ('pth', 'ply'), f'Unsupported checkpoint type: {pp.checkpoint_type}'
 
 
-def main(sys_argv):
-    parser = ArgumentParser(add_config_path_arg=True)
+def main(sys_argv, prog=None):
+    parser = ArgumentParser(prog, add_config_path_arg=True)
     parser.add_arguments(PipelineParams, dest="pipeline")  # noqa
     parser.add_arguments(CONFIG_CACHE[0], dest="model_group")  # noqa
 
