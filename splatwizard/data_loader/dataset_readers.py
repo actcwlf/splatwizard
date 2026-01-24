@@ -196,7 +196,7 @@ def readColmapSceneInfo(path, images, data_mode: DataMode, llffhold=8, lod=None)
     )
     cam_infos = sorted(cam_infos_unsorted.copy(), key = lambda x : x.image_name)
 
-    # TODO: 检查数据划分的合理性
+    # TODO: Check the reasonableness of data partitioning
     # if lod > 0:
     #         print(f'using lod, using eval')
     #         if lod < 50:

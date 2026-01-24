@@ -32,8 +32,8 @@ class _grid_encode(Function):
             assert len(binary_vxl.shape) == inputs.shape[-1]
 
         N, num_dim = inputs.shape # batch size, coord dim # N_rays, 3
-        n_levels = offsets_list.shape[0] - 1 # level # 层数=16
-        n_features = embeddings.shape[1] # embedding dim for each level # 就是channel数=2
+        n_levels = offsets_list.shape[0] - 1 # level # num_levels=16
+        n_features = embeddings.shape[1] # embedding dim for each level # channel count=2
 
         max_level_id = min_level_id + n_levels_calc
 
@@ -43,8 +43,8 @@ class _grid_encode(Function):
             embeddings = embeddings.to(torch.half)
 
         # n_levels first, optimize cache for cuda kernel, but needs an extra permute later
-        outputs = torch.empty(n_levels_calc, N, n_features, device=inputs.device, dtype=embeddings.dtype)  # 创建一个buffer给cuda填充
-        # outputs = [hash层数=16, N_rays, channels=2]
+        outputs = torch.empty(n_levels_calc, N, n_features, device=inputs.device, dtype=embeddings.dtype)  # create a buffer for cuda filling
+        # outputs = [hash_levels=16, N_rays, channels=2]
 
         # zero init if we only calculate partial levels
         # if n_levels_calc < n_levels: outputs.zero_()
@@ -83,11 +83,11 @@ class _grid_encode(Function):
                 min_level_id
                 )
 
-        # permute back to [N, n_levels * n_features]  # [N_rays, hash层数=16 * channels=2]
+        # permute back to [N, n_levels * n_features]  # [N_rays, hash_levels=16 * channels=2]
         outputs = outputs.permute(1, 0, 2).reshape(N, n_levels_calc * n_features)
 
         ctx.save_for_backward(inputs, embeddings, offsets_list, resolutions_list, dy_dx, binary_vxl)
-        ctx.dims = [N, num_dim, n_features, n_levels_calc, min_level_id, max_level_id, Rb, PV]  # min_level_id是否要单独save为tensor
+        ctx.dims = [N, num_dim, n_features, n_levels_calc, min_level_id, max_level_id, Rb, PV]  # whether min_level_id should be saved as a separate tensor
 
         return outputs
 

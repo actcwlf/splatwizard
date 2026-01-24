@@ -85,7 +85,7 @@ def reconstruct_model(ppl: PipelineParams, mp: ModelParams, opt: OptimizationPar
             mask = cv2.imread(p)
             masks.append(mask)
 
-    # 点剔除目前存在一些问题，推测是一些边界外点的问题
+    # Point culling currently has some issues, presumably due to some out-of-bound points
     pcd = cull_scan_points(gs_model.xyz.cpu().detach().numpy(), cameras, shrink_factor=mep.shrink_factor, masks=masks)
 
     if train_context.base_output_dir is not None:
