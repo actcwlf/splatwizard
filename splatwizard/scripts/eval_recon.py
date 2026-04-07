@@ -31,8 +31,6 @@ def setup_output_dir(pp: PipelineParams, train_context: TrainContext, stage: Enu
     train_context.checkpoint_dir = train_context.output_dir / 'checkpoints'
     train_context.checkpoint_dir.mkdir(exist_ok=True)
 
-    # if pp.env_path is not None:
-    #     os.environ["PATH"] = pp.env_path + ':' + os.environ["PATH"]
 
     # Initialize log file
     logger.add(train_context.output_dir / 'eval_recon.log')
@@ -74,7 +72,6 @@ def main():
 
     args = parser.parse_args(sys.argv[1:])
 
-    # mp = args.model_group.model
     pp: PipelineParams = args.pipeline
     # op: OptimizationParams = args.model_group.optim
     mep: MeshExtractorParams = args.mesh_group
