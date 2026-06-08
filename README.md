@@ -15,6 +15,7 @@ Key features of the project include:
 - **Multiple baseline models** included for comparison
 
 ## Latest News
+- 2026/06/07: Benchmark paper published at [CVPRF'26](https://openaccess.thecvf.com/content/CVPR2026F/html/Liu_Splatwizard_A_Benchmark_Toolkit_for_3D_Gaussian_Splatting_Compression_CVPRF_2026_paper.html)
 - 2025/12/31: Preprint available on [arXiv](https://arxiv.org/abs/2512.24742).
 - 2025/11/25: Release first version.
 
@@ -81,11 +82,13 @@ For more models. please check [Model List](splatwizard.github.io/splatwizard/mod
 If you find our work helpful, please consider citing:
 
 ```
-@article{liu2025splatwizard,
-  title={Splatwizard: A Benchmark Toolkit for 3D Gaussian Splatting Compression},
-  author={Liu, Xiang and Zhou, Yimin and Wang, Jinxiang and Huang, Yujun and Xie, Shuzhao and Qin, Shiyu and Hong, Mingyao and Li, Jiawei and Wang, Yaowei and Wang, Zhi and others},
-  journal={arXiv preprint arXiv:2512.24742},
-  year={2025}
+@InProceedings{Liu_2026_CVPR,
+    author    = {Liu, Xiang and Zhou, Yimin and Wang, Jinxiang and Huang, Yujun and Xie, Shuzhao and Qin, Shiyu and Hong, Mingyao and Li, Jiawei and Wang, Yaowei and Wang, Zhi and Xia, Shu-Tao and Chen, Bin},
+    title     = {Splatwizard: A Benchmark Toolkit for 3D Gaussian Splatting Compression},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Findings},
+    month     = {June},
+    year      = {2026},
+    pages     = {2261-2271}
 }
 ```
 
