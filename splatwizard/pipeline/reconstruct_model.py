@@ -4,7 +4,6 @@ import pathlib
 import tempfile
 
 import cv2
-# from random import randint
 import open3d as o3d
 import torch
 
@@ -66,20 +65,12 @@ def reconstruct_model(ppl: PipelineParams, mp: ModelParams, opt: OptimizationPar
         decode_time = prof.duration
 
 
-    # with torch.no_grad():
-    #     eval_pack: EvalPack = evaluate(gs_model, ppl, scene)
-    #     eval_pack.encode_time = encode_time
-    #     eval_pack.decode_time = decode_time
-    #     eval_pack.total_bytes = total_bytes
-    #
-    #     gs_model.test_report(eval_pack, first_iter)
 
     # Using train dataset during reconstruction
     cameras = scene.getTestCameras()
 
     masks = []
     if ppl.mask_dir:
-        # mask_dir = '{0}/mask'.format(instance_dir)
         mask_paths = sorted(glob.glob(os.path.join(ppl.mask_dir, "*.png")))
         for p in mask_paths:
             mask = cv2.imread(p)
@@ -125,7 +116,6 @@ def reconstruct_model(ppl: PipelineParams, mp: ModelParams, opt: OptimizationPar
         o3d.io.write_triangle_mesh(mesh_post_path, mesh_post)
         logger.info("mesh post processed saved at {}".format(mesh_post_path))
 
-        # mesh = o3d.io.read_triangle_mesh(mesh_post_path)
 
     if mep.unbounded:
         # Culling only supports bounded scene in current stage

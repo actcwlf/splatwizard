@@ -37,8 +37,6 @@ def setup_output_dir(pp: PipelineParams, train_context: TrainContext, stage: Enu
         train_context.render_result_dir = train_context.output_dir / 'render_results'
         train_context.render_result_dir.mkdir(exist_ok=True)
 
-    # if pp.env_path is not None:
-    #     os.environ["PATH"] = pp.env_path + ':' + os.environ["PATH"]
 
     # Initialize log file
     logger.add(train_context.output_dir / 'eval.log')
